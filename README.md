@@ -12,6 +12,15 @@ omarchy plugin add https://github.com/D3m0nZOnFire/clock-fr.git --enable
 
 Then, if you want to replace the stock clock, remove `omarchy.clock` from the bar (Omarchy menu, or delete its entry from `bar.layout.center` in `~/.config/omarchy/shell.json`).
 
+## Uninstall
+
+```bash
+omarchy plugin remove D3m0nZ.clock-fr
+omarchy plugin enable omarchy.clock   # optional: bring back the stock clock
+```
+
+Removing disables the widget and deletes its folder from `~/.config/omarchy/plugins/`. The plugin stores nothing outside `shell.json` (its own entry, plus `centerAnchor` if you pointed it at this widget) and does not modify any other file.
+
 ## What differs from `omarchy.clock`
 
 - Bar label and calendar use French names, capitalized ("Mercredi", "Septembre").
@@ -41,6 +50,10 @@ To target a different French locale, change `Qt.locale("fr_CH")` (e.g. to `"fr_F
 Target `D3m0nZ.clock-fr`: `open`, `close`, `toggle`, `show`, `hide`, `refresh`, `cycleFormat`, `toggleWeekStart`.
 
 Note the stock keybinding for the calendar targets `omarchy.clock`, so it does nothing once that widget is removed. Bind your own to this target if you want one.
+
+## Dependencies
+
+None beyond Omarchy itself (Quickshell and the shell's `qs.Ui` / `qs.Commons` modules). No extra packages and no system locale needed.
 
 ## Compatibility
 
