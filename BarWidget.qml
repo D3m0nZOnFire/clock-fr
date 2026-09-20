@@ -20,7 +20,7 @@ import "Fr.js" as Fr
 // updates and re-apply the frLocale swap if this widget breaks.
 BarWidget {
   id: root
-  moduleName: "D3m0nZ.clock-fr"
+  moduleName: "d3m0nz.clock-fr"
 
   // The one real change vs. the stock clock. Qt.locale("fr_CH") uses Qt's
   // bundled CLDR data, so it does not depend on a generated system locale.
@@ -140,7 +140,7 @@ BarWidget {
   }
 
   IpcHandler {
-    target: "D3m0nZ.clock-fr"
+    target: "d3m0nz.clock-fr"
 
     function refresh(): void { root.broadcast("refresh") }
     function cycleFormat(): void { root.cycleFormat() }

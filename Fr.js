@@ -1,6 +1,6 @@
 .pragma library
 
-// Small formatting helpers for the D3m0nZ.clock-fr fork. Not from upstream —
+// Small formatting helpers for the d3m0nz.clock-fr fork. Not from upstream —
 // nothing to re-sync here.
 
 // Capitalize the first letter of every word. French CLDR hands back lowercase

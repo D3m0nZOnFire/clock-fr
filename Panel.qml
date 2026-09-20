@@ -17,7 +17,7 @@ import "Fr.js" as Fr
 // anchor against.
 //
 // Fork of the first-party omarchy.clock Panel.qml. Differences from stock:
-//   - moduleName / ipcTarget renamed to D3m0nZ.clock-fr
+//   - moduleName / ipcTarget renamed to d3m0nz.clock-fr
 //   - labelLocale + the two hero/month-nav Qt.formatDate() calls go through
 //     a fixed French locale (frLocale) so weekday/month names render in
 //     French; the stock file pins Qt.locale("en_US") on purpose.
@@ -26,8 +26,8 @@ import "Fr.js" as Fr
 // after omarchy updates and re-apply these swaps if the calendar breaks.
 Panel {
   id: root
-  moduleName: "D3m0nZ.clock-fr"
-  ipcTarget: "D3m0nZ.clock-fr"
+  moduleName: "d3m0nz.clock-fr"
+  ipcTarget: "d3m0nz.clock-fr"
   manageIpc: false
 
   // Qt.locale("fr_CH") uses Qt's bundled CLDR data; no generated system

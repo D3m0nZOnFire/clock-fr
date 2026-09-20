@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "D3m0nZ.clock-fr",
+  "id": "d3m0nz.clock-fr",
   "name": "Clock (French)",
   "version": "1.0.0",
   "author": "D3m0nZ",
+  "license": "MIT",
   "description": "Date/time label with a calendar popup, localized to French (fr_CH). A fork of the Omarchy clock.",
   "kinds": [
     "bar-widget"

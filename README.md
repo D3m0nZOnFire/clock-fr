@@ -1,4 +1,4 @@
-# D3m0nZ.clock-fr
+# d3m0nz.clock-fr
 
 A French version of the [Omarchy](https://omarchy.org) bar clock. Same widget, same calendar popup, but weekday and month names come out in French ("Mercredi 14:30", "2 Septembre") instead of English.
 
@@ -15,7 +15,7 @@ Then, if you want to replace the stock clock, remove `omarchy.clock` from the ba
 ## Uninstall
 
 ```bash
-omarchy plugin remove D3m0nZ.clock-fr
+omarchy plugin remove d3m0nz.clock-fr
 omarchy plugin enable omarchy.clock   # optional: bring back the stock clock
 ```
 
@@ -47,7 +47,7 @@ To target a different French locale, change `Qt.locale("fr_CH")` (e.g. to `"fr_F
 
 ## IPC
 
-Target `D3m0nZ.clock-fr`: `open`, `close`, `toggle`, `show`, `hide`, `refresh`, `cycleFormat`, `toggleWeekStart`.
+Target `d3m0nz.clock-fr`: `open`, `close`, `toggle`, `show`, `hide`, `refresh`, `cycleFormat`, `toggleWeekStart`.
 
 Note the stock keybinding for the calendar targets `omarchy.clock`, so it does nothing once that widget is removed. Bind your own to this target if you want one.
 
