@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "D3m0nZ.clock-fr",
+  "name": "Clock (French)",
+  "version": "1.0.0",
+  "author": "D3m0nZ",
+  "description": "Date/time label with a calendar popup, localized to French (fr_CH). A fork of the Omarchy clock.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Clock (French)",
+    "description": "Date/time label with a calendar popup, in French",
+    "category": "Time",
+    "allowMultiple": false,
+    "defaultSection": "center",
+    "defaults": {
+      "format": "dddd HH:mm",
+      "formatAlt": "dd-MM-yyyy"
+    }
+  }
+}
