@@ -17,6 +17,7 @@ function capitalizeWords(text) {
 // 12-hour AM/PM twins and month-first dates).
 var HORIZONTAL_FORMATS = [
   "dddd HH:mm",
+  "dddd HH:mm:ss",
   "HH:mm",
   "dddd dd-MM-yyyy HH:mm",
   "dd-MM-yyyy HH:mm",

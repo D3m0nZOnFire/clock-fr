@@ -24,10 +24,10 @@ Removing disables the widget and deletes its folder from `~/.config/omarchy/plug
 ## What differs from `omarchy.clock`
 
 - Bar label and calendar use French names, capitalized ("Mercredi", "Septembre").
-- Right-click format ring is 24-hour only, day-month-year order (no AM/PM, no month-first dates).
+- Right-click format ring is 24-hour only, day-month-year order (no AM/PM, no month-first dates). It includes a live-seconds format (`dddd HH:mm:ss`); the clock only ticks every second while a format with seconds is shown.
 - Default formats: `dddd HH:mm` and `dd-MM-yyyy`.
 - Calendar weeks start on Monday by default.
-- Popup strings are translated (tooltips, "NÉ EN", "JUSQU'À", "VIE", "S" for week number).
+- Popup strings are translated with the same wording as Omarchy's official French translation (tooltips, "NAISSANCE", "JUSQU'À", "VIE", "S" for week number).
 
 Behavior is otherwise unchanged: left click opens the calendar, right click cycles the label format, middle click opens the timezone picker.
 
@@ -57,7 +57,9 @@ None beyond Omarchy itself (Quickshell and the shell's `qs.Ui` / `qs.Commons` mo
 
 ## Compatibility
 
-`Panel.qml` imports Omarchy's internal `qs.Ui` / `qs.Commons` components, which are not a stable plugin API. It was last checked against Omarchy 4.0.4. If an update breaks the widget, diff against `/usr/share/omarchy/shell/plugins/panels/clock/` and re-apply the French changes.
+`Panel.qml` imports Omarchy's internal `qs.Ui` / `qs.Commons` components, which are not a stable plugin API. It was last checked against Omarchy 4.0.4, and also carries the self-contained clock fixes from Omarchy's development branch (calendar grid walked in UTC so DST-at-midnight zones don't repeat a day, live-seconds format, bar tooltip). If an update breaks the widget, diff against `/usr/share/omarchy/shell/plugins/panels/clock/` and re-apply the French changes.
+
+Omarchy's development branch also translates the stock clock itself ("Omarchy in 50 languages"). Once that ships in a release, setting Omarchy's language to French gives you most of this plugin with `omarchy.clock`; this fork stays useful if you want the 24-hour-only ring, capitalized names, or French dates with the rest of the desktop in another language.
 
 ## License
 

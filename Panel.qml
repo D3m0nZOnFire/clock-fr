@@ -54,7 +54,9 @@ Panel {
   property int viewYear: today.getFullYear()
   property int viewMonth: today.getMonth()
 
-  readonly property date viewDate: new Date(viewYear, viewMonth, 1)
+  // Local noon, so a first of the month with no midnight (Havana, April 2012)
+  // still names its own month; UTC would name the previous one west of Greenwich.
+  readonly property date viewDate: new Date(viewYear, viewMonth, 1, 12)
   readonly property bool viewingCurrentMonth: viewYear === today.getFullYear() && viewMonth === today.getMonth()
 
   // Pinned to today, not to the month being browsed — stepping through the
@@ -312,6 +314,7 @@ Panel {
                 // sitting visibly low against the digits.
                 anchors.baseline: heroDate.baseline
                 text: "󰃭"
+                textFormat: Text.PlainText
                 color: heroMouse.containsMouse
                   ? Style.hoverStateColor(root.contentForeground, Color.accent)
                   : root.contentForeground
@@ -349,7 +352,7 @@ Panel {
 
               PanelToolTip {
                 visible: heroMouse.containsMouse
-                text: "Revenir à aujourd'hui"
+                text: "Retour à aujourd'hui"
                 fontFamily: root.contentFontFamily
               }
             }
@@ -382,7 +385,8 @@ Panel {
 
                 Text {
                   anchors.verticalCenter: parent.verticalCenter
-                  text: "NÉ EN"
+                  text: "NAISSANCE"
+                  textFormat: Text.PlainText
                   color: Qt.darker(root.contentForeground, 1.5)
                   font.family: root.contentFontFamily
                   font.pixelSize: Style.font.bodySmall
@@ -393,7 +397,7 @@ Panel {
                   id: bornField
                   width: Style.space(70)
                   anchors.verticalCenter: parent.verticalCenter
-                  placeholderText: "année"
+                  placeholderText: "an"
                   foreground: root.contentForeground
                   font.family: root.contentFontFamily
                   inputMethodHints: Qt.ImhDigitsOnly
@@ -406,6 +410,7 @@ Panel {
                   anchors.verticalCenterOffset: 0
                   leftPadding: Style.space(6)
                   text: "JUSQU'À"
+                  textFormat: Text.PlainText
                   color: Qt.darker(root.contentForeground, 1.5)
                   font.family: root.contentFontFamily
                   font.pixelSize: Style.font.bodySmall
@@ -493,6 +498,7 @@ Panel {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 text: "VIE"
+                textFormat: Text.PlainText
                 color: Qt.darker(root.contentForeground, 1.5)
                 font.family: root.contentFontFamily
                 font.pixelSize: Style.font.bodySmall
@@ -592,6 +598,7 @@ Panel {
                   Text {
                     anchors.centerIn: parent
                     text: "S"
+                    textFormat: Text.PlainText
                     color: weekStartMouse.containsMouse
                       ? Style.hoverStateColor(root.contentForeground, Color.accent)
                       : Qt.darker(root.contentForeground, 1.9)
@@ -611,7 +618,7 @@ Panel {
 
                   PanelToolTip {
                     visible: weekStartMouse.containsMouse
-                    text: "Commencer la semaine le " + root.nextWeekStartLabel
+                    text: "Semaines commençant le " + root.nextWeekStartLabel
                     fontFamily: root.contentFontFamily
                   }
                 }
