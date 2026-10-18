@@ -2,7 +2,7 @@
 
 A French version of the [Omarchy](https://omarchy.org) bar clock. Same widget, same calendar popup, but weekday and month names come out in French ("Mercredi 14:30", "2 Septembre") instead of English.
 
-![The bar clock showing "Dimanche 15:10"](screenshots/clock.png)
+![The bar clock showing "Dimanche 15:18" with the calendar popup open](preview.png)
 
 Stock `omarchy.clock` ignores `$LANG` / `$LC_TIME` and always renders English names, because it calls the QML-global `Qt.formatDateTime()`. This fork formats through `Qt.locale("fr_CH")` instead. That uses Qt's bundled CLDR data, so no system locale needs to be generated.
 
