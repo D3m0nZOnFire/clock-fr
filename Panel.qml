@@ -181,14 +181,10 @@ Panel {
     persistSettings({ weekStartDay: Model.weekStartSettingName(next) })
   }
 
+  // The edit row (and its two fields) is loaded on demand and seeds itself
+  // when it loads; see lifeEditor.
   function startEditingLife() {
     root.editingLife = true
-    Qt.callLater(function() {
-      bornField.text = root.birthYear > 0 ? String(root.birthYear) : ""
-      expectancyField.text = String(root.lifeExpectancy)
-      bornField.selectAll()
-      bornField.forceActiveFocus()
-    })
   }
 
   function cancelEditingLife() {
@@ -221,8 +217,10 @@ Panel {
   }
 
   function commitLife() {
-    var born = Model.parseBirthYear(bornField.text, today.getFullYear())
-    var span = Model.parseLifeExpectancy(expectancyField.text)
+    var editor = lifeEditor.item
+    if (!editor) return cancelEditingLife()
+    var born = Model.parseBirthYear(editor.born.text, today.getFullYear())
+    var span = Model.parseLifeExpectancy(editor.expectancy.text)
     if (born !== root.birthYear || span !== root.lifeExpectancy)
       persistSettings({ birthYear: born, lifeExpectancy: span })
     cancelEditingLife()
@@ -377,56 +375,76 @@ Panel {
                 onDoubleTapped: root.startEditingLife()
               }
 
-              Row {
-                visible: root.editingLife
+              // Only exists while editing: an editable TextField watches the
+              // clipboard for its whole life, so keeping a pair around behind
+              // the closed popup would have the shell read every clipboard
+              // change for nothing. close() ends the edit, which unloads them.
+              Loader {
+                id: lifeEditor
+                active: root.editingLife
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: Style.space(10)
 
-                Text {
-                  anchors.verticalCenter: parent.verticalCenter
-                  text: "NAISSANCE"
-                  textFormat: Text.PlainText
-                  color: Qt.darker(root.contentForeground, 1.5)
-                  font.family: root.contentFontFamily
-                  font.pixelSize: Style.font.bodySmall
-                  font.letterSpacing: 1
-                }
+                sourceComponent: Row {
+                  spacing: Style.space(10)
 
-                TextField {
-                  id: bornField
-                  width: Style.space(70)
-                  anchors.verticalCenter: parent.verticalCenter
-                  placeholderText: "an"
-                  foreground: root.contentForeground
-                  font.family: root.contentFontFamily
-                  inputMethodHints: Qt.ImhDigitsOnly
+                  property alias born: bornField
+                  property alias expectancy: expectancyField
 
-                  Keys.onPressed: function(event) { root.handleLifeKey(event, expectancyField) }
-                }
+                  Component.onCompleted: {
+                    bornField.text = root.birthYear > 0 ? String(root.birthYear) : ""
+                    expectancyField.text = String(root.lifeExpectancy)
+                    Qt.callLater(function() {
+                      bornField.selectAll()
+                      bornField.forceActiveFocus()
+                    })
+                  }
 
-                Text {
-                  anchors.verticalCenter: parent.verticalCenter
-                  anchors.verticalCenterOffset: 0
-                  leftPadding: Style.space(6)
-                  text: "JUSQU'À"
-                  textFormat: Text.PlainText
-                  color: Qt.darker(root.contentForeground, 1.5)
-                  font.family: root.contentFontFamily
-                  font.pixelSize: Style.font.bodySmall
-                  font.letterSpacing: 1
-                }
+                  Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "NAISSANCE"
+                    textFormat: Text.PlainText
+                    color: Qt.darker(root.contentForeground, 1.5)
+                    font.family: root.contentFontFamily
+                    font.pixelSize: Style.font.bodySmall
+                    font.letterSpacing: 1
+                  }
 
-                TextField {
-                  id: expectancyField
-                  width: Style.space(60)
-                  anchors.verticalCenter: parent.verticalCenter
-                  placeholderText: "90"
-                  foreground: root.contentForeground
-                  font.family: root.contentFontFamily
-                  inputMethodHints: Qt.ImhDigitsOnly
+                  TextField {
+                    id: bornField
+                    width: Style.space(70)
+                    anchors.verticalCenter: parent.verticalCenter
+                    placeholderText: "an"
+                    foreground: root.contentForeground
+                    font.family: root.contentFontFamily
+                    inputMethodHints: Qt.ImhDigitsOnly
 
-                  Keys.onPressed: function(event) { root.handleLifeKey(event, bornField) }
+                    Keys.onPressed: function(event) { root.handleLifeKey(event, expectancyField) }
+                  }
+
+                  Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 0
+                    leftPadding: Style.space(6)
+                    text: "JUSQU'À"
+                    textFormat: Text.PlainText
+                    color: Qt.darker(root.contentForeground, 1.5)
+                    font.family: root.contentFontFamily
+                    font.pixelSize: Style.font.bodySmall
+                    font.letterSpacing: 1
+                  }
+
+                  TextField {
+                    id: expectancyField
+                    width: Style.space(60)
+                    anchors.verticalCenter: parent.verticalCenter
+                    placeholderText: "90"
+                    foreground: root.contentForeground
+                    font.family: root.contentFontFamily
+                    inputMethodHints: Qt.ImhDigitsOnly
+
+                    Keys.onPressed: function(event) { root.handleLifeKey(event, bornField) }
+                  }
                 }
               }
 
