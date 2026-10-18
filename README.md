@@ -2,6 +2,8 @@
 
 A French version of the [Omarchy](https://omarchy.org) bar clock. Same widget, same calendar popup, but weekday and month names come out in French ("Mercredi 14:30", "2 Septembre") instead of English.
 
+![The bar clock showing "Dimanche 15:10"](screenshots/clock.png)
+
 Stock `omarchy.clock` ignores `$LANG` / `$LC_TIME` and always renders English names, because it calls the QML-global `Qt.formatDateTime()`. This fork formats through `Qt.locale("fr_CH")` instead. That uses Qt's bundled CLDR data, so no system locale needs to be generated.
 
 ## Install
@@ -25,6 +27,7 @@ Removing disables the widget and deletes its folder from `~/.config/omarchy/plug
 
 - Bar label and calendar use French names, capitalized ("Mercredi", "Septembre").
 - Right-click format ring is 24-hour only, day-month-year order (no AM/PM, no month-first dates). It includes a live-seconds format (`dddd HH:mm:ss`); the clock only ticks every second while a format with seconds is shown.
+- The ring also has `dddd d MMM HH:mm` ("Dimanche 18 Oct. 14:58"), right after the default.
 - Default formats: `dddd HH:mm` and `dd-MM-yyyy`.
 - Calendar weeks start on Monday by default.
 - Popup strings are translated with the same wording as Omarchy's official French translation (tooltips, "NAISSANCE", "JUSQU'À", "VIE", "S" for week number).
@@ -50,6 +53,12 @@ To target a different French locale, change `Qt.locale("fr_CH")` (e.g. to `"fr_F
 Target `d3m0nz.clock-fr`: `open`, `close`, `toggle`, `show`, `hide`, `refresh`, `cycleFormat`, `toggleWeekStart`.
 
 Note the stock keybinding for the calendar targets `omarchy.clock`, so it does nothing once that widget is removed. Bind your own to this target if you want one.
+
+## Tests
+
+```bash
+node test/fr-test.js
+```
 
 ## Dependencies
 
